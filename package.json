@@ -1,0 +1,26 @@
+{
+  "name": "meantodos",
+  "version": "1.0.0",
+  "description": "Simple todo app with MEAN stack",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kksrini89/ng2-MEAN-Todos.git"
+  },
+  "keywords": [
+    "ng2 mean",
+    "ng2 mean todos"
+  ],
+  "author": "Srinivasan K K",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "mongojs": "^2.4.0",
+    "nodemon": "^1.11.0"
+  }
+}
