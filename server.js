@@ -11,6 +11,9 @@ var todos = require('./routes/todos');
 app.set('views', path.join(__dirname, 'views'));
 //Set view engine
 app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+
+app.use(express.static(path.join(__dirname, "client")));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

@@ -2,7 +2,7 @@
 
     index.init = function (app) {
         app.get('/', (req, res) => {
-            res.send('Index Page');
+            res.render("index.html");
         });
     }
 
