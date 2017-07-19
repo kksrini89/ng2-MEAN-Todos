@@ -3,7 +3,6 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 
-
 var index = require('./routes/index');
 var todos = require('./routes/todos');
 
@@ -28,3 +27,5 @@ todos.init(app);
 app.listen(3000, () => {
     console.log("Server is started running on 3000");
 });
+
+require('nodemon').emit('quit');
