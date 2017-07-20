@@ -35,10 +35,10 @@
         //SAVE todo
         app.post(`${url}/todo`, (req, res, next) => {
             var todo = req.body;
-            if (!todo.text || !todo.isCompleted) {
+            if (!todo.text || !(todo.isCompleted + '')) {
                 res.status(400).json({ "error": "Invalid data" });
             } else {
-                db.todos.save((err, result) => {
+                db.todos.save(todo, (err, result) => {
                     if (err) {
                         res.send(err);
                     } else {

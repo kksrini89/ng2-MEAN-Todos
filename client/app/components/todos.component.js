@@ -22,6 +22,18 @@ var TodosComponent = (function () {
             _this.todos = todos;
         });
     };
+    TodosComponent.prototype.addTodo = function (event, todotext) {
+        var _this = this;
+        var newTodo = {
+            text: todotext.value,
+            isCompleted: false
+        };
+        this.todoService.saveTodos(newTodo)
+            .subscribe(function (res) {
+            _this.todos.push(newTodo);
+            todotext.value = '';
+        });
+    };
     TodosComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
