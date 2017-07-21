@@ -34,11 +34,47 @@ var TodosComponent = (function () {
             todotext.value = '';
         });
     };
+    TodosComponent.prototype.setEditState = function (todo, state) {
+        if (state) {
+            todo.isEditMode = state;
+        }
+        else {
+            delete todo.isEditMode;
+        }
+    };
+    TodosComponent.prototype.updateStatus = function (todo) {
+        var _todo = {
+            _id: todo._id,
+            text: todo.text,
+            isCompleted: !todo.isCompleted
+        };
+        return this.todoService.updateTodos(_todo)
+            .subscribe(function (res) {
+            todo.isCompleted = !todo.isCompleted;
+        });
+    };
+    TodosComponent.prototype.updateTodoText = function (event, todo) {
+        var _this = this;
+        if (event.which === 13) {
+            todo.text = event.target.value;
+            var _todo = {
+                _id: todo._id,
+                text: todo.text,
+                isCompleted: todo.isCompleted
+            };
+            this.todoService.updateTodos(_todo).subscribe(function (res) {
+                _this.setEditState(todo, false);
+            });
+        }
+    };
     TodosComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'todos',
-            templateUrl: 'todos.component.html'
+            templateUrl: 'todos.component.html',
+            styles: [
+                "\n    .add-todo-form{\n      margin-top :70px;\n    }\n    "
+            ]
         }),
         __metadata("design:paramtypes", [todos_service_1.TodoService])
     ], TodosComponent);

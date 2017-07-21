@@ -52,10 +52,10 @@
         app.put(`${url}/todos/:id`, (req, res, next) => {
             var todo = req.body;
             var updatedObj = {};
-            if (!todo.isCompleted) {
+            if (todo.isCompleted) {
                 updatedObj.isCompleted = todo.isCompleted;
             }
-            if (!todo.text) {
+            if (todo.text) {
                 updatedObj.text = todo.text;
             }
             if (!updatedObj) {

@@ -6,7 +6,14 @@ import { Todo } from './../todo.model';
 @Component({
   moduleId: module.id,
   selector: 'todos',
-  templateUrl: 'todos.component.html'
+  templateUrl: 'todos.component.html',
+  styles: [
+    `
+    .add-todo-form{
+      margin-top :70px;
+    }
+    `
+  ]
 })
 
 export class TodosComponent implements OnInit {
@@ -29,5 +36,40 @@ export class TodosComponent implements OnInit {
         this.todos.push(newTodo);
         todotext.value = '';
       });
+  }
+
+  setEditState(todo, state) {
+    if (state) {
+      todo.isEditMode = state;
+    } else {
+      delete todo.isEditMode;
+    }
+  }
+
+  updateStatus(todo) {
+    let _todo = {
+      _id: todo._id,
+      text: todo.text,
+      isCompleted: !todo.isCompleted
+    };
+    return this.todoService.updateTodos(_todo)
+      .subscribe(res => {
+        todo.isCompleted = !todo.isCompleted;
+      });
+  }
+
+  updateTodoText(event, todo) {
+    if (event.which === 13) {
+      todo.text = event.target.value;
+      var _todo = {
+        _id: todo._id,
+        text: todo.text,
+        isCompleted: todo.isCompleted
+      }
+
+      this.todoService.updateTodos(_todo).subscribe(res => {
+        this.setEditState(todo, false);
+      });
+    }
   }
 }
