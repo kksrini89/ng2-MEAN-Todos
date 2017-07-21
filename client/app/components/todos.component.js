@@ -67,6 +67,21 @@ var TodosComponent = (function () {
             });
         }
     };
+    /**
+     * Delete Todos
+     */
+    TodosComponent.prototype.deleteTodo = function (todo) {
+        var _this = this;
+        this.todoService.deleteTodo(todo._id)
+            .subscribe(function (data) {
+            var existingTodo = _this.todos.filter(function (item) {
+                if (item._id === todo._id) {
+                    return item;
+                }
+            });
+            _this.todos.splice(_this.todos.indexOf(todo), 1);
+        });
+    };
     TodosComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

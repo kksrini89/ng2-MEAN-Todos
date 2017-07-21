@@ -72,4 +72,19 @@ export class TodosComponent implements OnInit {
       });
     }
   }
+
+  /**
+   * Delete Todos
+   */
+  public deleteTodo(todo) {
+    this.todoService.deleteTodo(todo._id)
+      .subscribe(data => {
+        let existingTodo = this.todos.filter((item) => {
+          if (item._id === todo._id) {
+            return item;
+          }
+        });
+        this.todos.splice(this.todos.indexOf(todo), 1);
+      });
+  }
 }

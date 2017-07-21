@@ -16,19 +16,38 @@ var TodoService = (function () {
     function TodoService(_http) {
         this._http = _http;
     }
+    /**
+     * GET Todos
+     */
     TodoService.prototype.getTodos = function () {
         return this._http.get('/api/v1/todos').map(function (res) { return res.json(); });
     };
+    /**
+     * SAVE Todos
+     * @param newTodo
+     */
     TodoService.prototype.saveTodos = function (newTodo) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
         return this._http.post('/api/v1/todo', JSON.stringify(newTodo), { headers: headers })
             .map(function (res) { return res.json(); });
     };
+    /**
+     * UPDATE Todo
+     * @param todo
+     */
     TodoService.prototype.updateTodos = function (todo) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
         return this._http.put("/api/v1/todos/" + todo._id, JSON.stringify(todo), { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    /**
+     * DELETE Todo
+     * @param id
+     */
+    TodoService.prototype.deleteTodo = function (id) {
+        return this._http.delete("/api/v1/todo/" + id)
             .map(function (res) { return res.json(); });
     };
     TodoService = __decorate([
